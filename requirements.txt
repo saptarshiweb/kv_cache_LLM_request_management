@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+motor
+boto3
+python-dotenv
+pydantic
+pytest
+requests
+locust

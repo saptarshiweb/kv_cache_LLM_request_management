@@ -1,0 +1,167 @@
+{
+  "info": {
+    "name": "KV-Cache Simulator API",
+    "description": "API collection for the KV-Cache Memory-Aware Request Queue Simulator. Can be imported directly into Bruno, Postman, or Insomnia.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Requests",
+      "item": [
+        {
+          "name": "Submit Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt_tokens\": 256,\n  \"max_tokens\": 512,\n  \"priority\": 2\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/requests",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["requests"]
+            }
+          }
+        },
+        {
+          "name": "List Requests",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/requests",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["requests"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "RUNNING",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Request by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/requests/{{request_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["requests", "{{request_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Observability",
+      "item": [
+        {
+          "name": "Get Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/status",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["status"]
+            }
+          }
+        },
+        {
+          "name": "Get Metrics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/metrics?last_n=100",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["metrics"],
+              "query": [
+                {
+                  "key": "last_n",
+                  "value": "100"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get Config",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/admin/config",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["admin", "config"]
+            }
+          }
+        },
+        {
+          "name": "Update Config",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"PREEMPTION_POLICY\": \"footprint\",\n  \"RESUME_MODE\": \"recompute\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/admin/config",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["admin", "config"]
+            }
+          }
+        },
+        {
+          "name": "Reset Simulation",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/admin/reset",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["admin", "reset"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

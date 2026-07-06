@@ -1,0 +1,14 @@
+opencollection: 1.0.0
+
+info:
+  name: KV-Cache Simulator API
+
+docs:
+  content: API collection for the KV-Cache Memory-Aware Request Queue Simulator. Can be imported directly into Bruno, Postman, or Insomnia.
+  type: text/markdown
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git
