@@ -1,8 +1,5 @@
 # PRD: KV-Cache Memory-Aware Request Queue (vLLM-Inspired Scheduler Simulator)
 
-**Author:** [Your Name]
-**Status:** Draft v1.0
-**Last Updated:** July 2026
 **Stack:** Python, FastAPI, Docker, AWS SQS (via LocalStack), MongoDB
 
 ---
