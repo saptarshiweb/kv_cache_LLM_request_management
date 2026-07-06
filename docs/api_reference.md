@@ -6,6 +6,18 @@ Interactive docs (Swagger UI): [http://localhost:8000/docs](http://localhost:800
 
 ---
 
+## Glossary of LLM Inference Terms
+
+Before exploring the endpoints, it helps to understand the domain-specific terms used in the API:
+
+* **`prompt_tokens` (Prefill phase)**: The number of tokens in the input prompt. The model processes these all at once, requiring an immediate chunk of KV-cache memory allocated upfront before generation can start.
+* **`max_tokens` (Decode phase)**: The generation budget. During decoding, the model generates one token at a time, requiring memory to grow iteratively.
+* **`priority`**: A weight used by the scheduler. When VRAM is full, lower-priority requests are preempted to make room for higher-priority ones.
+* **`allocated_blocks`**: The physical footprint of a request. The number of fixed-size KV-cache blocks currently held by the request in simulated GPU VRAM.
+* **`PREEMPTED` vs `SWAPPED`**: When VRAM saturates, requests are evicted. If `RESUME_MODE=recompute`, the request's state is discarded and its status becomes `PREEMPTED`. If `RESUME_MODE=swap`, the state is saved to disk/MongoDB (simulating CPU RAM) and its status becomes `SWAPPED`. Both modes free up GPU VRAM blocks for other requests.
+
+---
+
 ## POST `/requests`
 
 Submit a new simulated inference request. The request is immediately written to MongoDB with status `QUEUED` and pushed to SQS for the scheduler to pick up.
